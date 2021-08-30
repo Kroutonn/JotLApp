@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".PlayerSheetActivity">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <androidx.appcompat.widget.Toolbar
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <include layout="@layout/layout_player_sheet_toolbar"/>
+
+        </androidx.appcompat.widget.Toolbar>
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:orientation="horizontal"
+        android:weightSum="100"
+        android:layout_weight="10">
+
+        <ImageButton
+            android:id="@+id/ActivityPlayerSheet_ImageButton_SubtractExp"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="11.5"
+            android:background="#00FFFFFF"
+            android:src="@drawable/ic_baseline_subtract_24"/>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_weight="12"
+            android:weightSum="100">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="30"
+                android:text="Exp"
+                android:gravity="center"
+                android:paddingTop="5dp"/>
+
+            <EditText
+                android:id="@+id/ActivityPlayerSheet_EditText_Exp"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="70"
+                android:textAlignment="center"
+                android:inputType="number"/>
+
+        </LinearLayout>
+
+
+        <ImageButton
+            android:id="@+id/ActivityPlayerSheet_ImageButton_AddExp"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="11.5"
+            android:background="#00FFFFFF"
+            android:src="@drawable/ic_baseline_add_24"/>
+
+        <ImageView
+            android:id="@+id/ActivityPlayerSheet_ImageView_CharacterImage"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="30"/>
+
+        <ImageButton
+            android:id="@+id/ActivityPlayerSheet_ImageButton_SubtractGold"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="11.5"
+            android:background="#00FFFFFF"
+            android:src="@drawable/ic_baseline_subtract_24"/>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="12"
+            android:orientation="vertical"
+            android:weightSum="100">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="30"
+                android:text="Gold"
+                android:gravity="center"
+                android:paddingTop="5dp"/>
+
+            <EditText
+                android:id="@+id/ActivityPlayerSheet_EditText_Gold"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="70"
+                android:textAlignment="center"
+                android:inputType="number"/>
+        </LinearLayout>
+
+
+
+        <ImageButton
+            android:id="@+id/ActivityPlayerSheet_ImageButton_AddGold"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="11.5"
+            android:background="#00FFFFFF"
+            android:src="@drawable/ic_baseline_add_24"/>
+    </LinearLayout>
+
+    <com.google.android.material.tabs.TabLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="5"
+        android:id="@+id/ActivityPlayerSheet_TabLayout_Tabs">
+    </com.google.android.material.tabs.TabLayout>
+
+    <androidx.viewpager2.widget.ViewPager2
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="75"
+        android:id="@+id/ActivityPlayerSheet_ViewPager_Tabs"/>
+</LinearLayout>

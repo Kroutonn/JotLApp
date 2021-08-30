@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="red_guard">
+        <item>Remove four +0 cards</item>
+        <item>Remove two -1 cards</item>
+        <item>Remove one -2 card and one +1 card</item>
+        <item>Replace one -1 card with one +1 card</item>
+        <item>Replace one -1 card with one +1 card</item>
+        <item>Replace one +1 card with one +2 (Fire) card</item>
+        <item>Replace one +1 card with one +2 (Fire) card</item>
+        <item>Replace one +1 card with one +2 (Light) card</item>
+        <item>Replace one +1 card with one +2 (Light) card</item>
+        <item>Add one +1 (Fire) (Light) card</item>
+        <item>Add one +1 (Fire) (Light) card</item>
+        <item>Add one +1 Shield 1 card</item>
+        <item>Add one +1 Shield 1 card</item>
+        <item>Replace one +0 card with one +1 IMMOBILIZE card</item>
+        <item>Replace one +0 card with one +1 WOUND card</item>
+    </string-array>
+    <string-array name="voidwarden">
+        <item>Remove two -1 cards</item>
+        <item>Remove one -2 card</item>
+        <item>Replace one +0 with one +1 (Dark) card</item>
+        <item>Replace one +0 with one +1 (Dark) card</item>
+        <item>Replace one +0 with one +1 (Ice) card</item>
+        <item>Replace one +0 with one +1 (Ice) card</item>
+        <item>Replace one -1 with one +0 Heal 1 (Ally) card</item>
+        <item>Replace one -1 with one +0 Heal 1 (Ally) card</item>
+        <item>Add one +1 Heal 1 (Ally) card</item>
+        <item>Add one +1 Heal 1 (Ally) card</item>
+        <item>Add one +1 Heal 1 (Ally) card</item>
+        <item>Add one +1 POISON card</item>
+        <item>Add one +3 card</item>
+        <item>Add one +1 CURSE card</item>
+        <item>Add one +1 CURSE card</item>
+    </string-array>
+    <string-array name="demolitionist">
+        <item>Remove four +0 cards</item>
+        <item>Remove two -1 cards</item>
+        <item>Remove two -1 cards</item>
+        <item>Remove one -2 card and one +1 card</item>
+        <item>Replace one +0 card with one +2 MUDDLE card</item>
+        <item>Replace one +0 card with one +2 MUDDLE card</item>
+        <item>Replace one -1 card with one +0 POISON card</item>
+        <item>Add one +2 card</item>
+        <item>Add one +2 card</item>
+        <item>Replace one +1 card with one +2 (Earth) card</item>
+        <item>Replace one +1 card with one +2 (Earth) card</item>
+        <item>Replace one +1 card with one +2 (Fire) card</item>
+        <item>Replace one +1 card with one +2 (Fire) card</item>
+        <item>Add one +0 All adjacent enemies suffer 1 damage card</item>
+        <item>Add one +0 All adjacent enemies suffer 1 damage card</item>
+    </string-array>
+    <string-array name="hatchet">
+        <item>Remove two -1 cards</item>
+        <item>Remove two -1 cards</item>
+        <item>Replace one +0 card with one +2 MUDDLE card</item>
+        <item>Replace one +0 card with one +1 POISON card</item>
+        <item>Replace one +0 card with one +1 WOUND card</item>
+        <item>Replace one +0 card with one +1 IMMOBILIZE card</item>
+        <item>Replace one +0 card with one +1 PUSH 2 card</item>
+        <item>Replace one +0 card with one +0 STUN card</item>
+        <item>Replace one +1 card with one +1 STUN card</item>
+        <item>Add one +2 (Air) card</item>
+        <item>Add one +2 (Air) card</item>
+        <item>Add one +2 (Air) card</item>
+        <item>Replace one +1 with one +3 card</item>
+        <item>Replace one +1 with one +3 card</item>
+        <item>Replace one +1 with one +3 card</item>
+    </string-array>
+</resources>
