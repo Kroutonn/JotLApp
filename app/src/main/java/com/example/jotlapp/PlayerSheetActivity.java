@@ -146,8 +146,7 @@ public class PlayerSheetActivity extends AppCompatActivity implements TextWatche
         mBackButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(PlayerSheetActivity.this, LoadHeroActivity.class);
-                startActivity(intent);
+                finish();
             }
         });
 

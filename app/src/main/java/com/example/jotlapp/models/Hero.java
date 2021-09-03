@@ -13,7 +13,7 @@ import androidx.room.PrimaryKey;
 public class Hero implements Parcelable {
 
     @PrimaryKey(autoGenerate = true)
-    private int id;
+    private int heroId;
 
     @NonNull
     @ColumnInfo(name = "name")
@@ -54,7 +54,7 @@ public class Hero implements Parcelable {
     }
 
     protected Hero(Parcel in) {
-        id = in.readInt();
+        heroId = in.readInt();
         name = in.readString();
         level = in.readString();
         experiance = in.readString();
@@ -75,12 +75,12 @@ public class Hero implements Parcelable {
         }
     };
 
-    public int getId() {
-        return id;
+    public int getHeroId() {
+        return heroId;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setHeroId(int heroId) {
+        this.heroId = heroId;
     }
 
     public String getName() {
@@ -134,7 +134,7 @@ public class Hero implements Parcelable {
     @Override
     public String toString() {
         return "Hero{" +
-                "id=" + id +
+                "heroId=" + heroId +
                 ", name='" + name + '\'' +
                 ", level='" + level + '\'' +
                 ", experiance='" + experiance + '\'' +
@@ -151,7 +151,7 @@ public class Hero implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel parcel, int i) {
-        parcel.writeInt(id);
+        parcel.writeInt(heroId);
         parcel.writeString(name);
         parcel.writeString(level);
         parcel.writeString(experiance);

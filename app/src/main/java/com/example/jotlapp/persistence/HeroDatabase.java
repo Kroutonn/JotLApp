@@ -7,11 +7,23 @@ import androidx.room.Room;
 import androidx.room.RoomDatabase;
 
 import com.example.jotlapp.models.Hero;
+import com.example.jotlapp.models.Item;
+import com.example.jotlapp.models.Perk;
+import com.example.jotlapp.models.relations.HeroItemCrossRef;
+import com.example.jotlapp.models.relations.HeroPerkCrossRef;
 
-@Database(entities = {Hero.class}, version = 1)
+@Database(entities = {
+            Hero.class,
+            Item.class,
+            Perk.class,
+            HeroItemCrossRef.class,
+            HeroPerkCrossRef.class
+        },
+        version = 1
+)
 public abstract class HeroDatabase extends RoomDatabase {
 
-    public static final String DATABASE_NAME = "heroes_db";
+    public static final String DATABASE_NAME = "hero_db";
 
     private static HeroDatabase instance;
 

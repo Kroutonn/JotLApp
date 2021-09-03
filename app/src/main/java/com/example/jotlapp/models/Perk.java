@@ -5,11 +5,15 @@ import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
-@Entity
+@Entity(tableName = "perks")
 public class Perk {
 
     @PrimaryKey
-    private int id;
+    private int perkId;
+
+    @NonNull
+    @ColumnInfo(name = "character")
+    private String character;
 
     @NonNull
     @ColumnInfo(name = "description")
@@ -19,12 +23,12 @@ public class Perk {
         this.description = description;
     }
 
-    public int getId() {
-        return id;
+    public int getPerkId() {
+        return perkId;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setPerkId(int perkId) {
+        this.perkId = perkId;
     }
 
     @NonNull
@@ -36,10 +40,20 @@ public class Perk {
         this.description = description;
     }
 
+    @NonNull
+    public String getCharacter() {
+        return character;
+    }
+
+    public void setCharacter(@NonNull String character) {
+        this.character = character;
+    }
+
     @Override
     public String toString() {
         return "Perk{" +
-                "id=" + id +
+                "perkId=" + perkId +
+                ", character='" + character + '\'' +
                 ", description='" + description + '\'' +
                 '}';
     }

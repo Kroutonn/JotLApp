@@ -2,15 +2,15 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "870bd1628aa85fb99ba1af27b517a5e5",
+    "identityHash": "62eb0141e2059a9903ec52f2f63a441c",
     "entities": [
       {
         "tableName": "heroes",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `name` TEXT NOT NULL, `level` TEXT NOT NULL, `experiance` TEXT NOT NULL, `gold` TEXT NOT NULL, `character` TEXT NOT NULL, `notes` INTEGER NOT NULL)",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`heroId` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `name` TEXT NOT NULL, `level` TEXT NOT NULL, `experiance` TEXT NOT NULL, `gold` TEXT NOT NULL, `character` TEXT NOT NULL, `notes` INTEGER NOT NULL)",
         "fields": [
           {
-            "fieldPath": "id",
-            "columnName": "id",
+            "fieldPath": "heroId",
+            "columnName": "heroId",
             "affinity": "INTEGER",
             "notNull": true
           },
@@ -53,9 +53,127 @@
         ],
         "primaryKey": {
           "columnNames": [
-            "id"
+            "heroId"
           ],
           "autoGenerate": true
+        },
+        "indices": [],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "items",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`itemId` INTEGER NOT NULL, `name` TEXT NOT NULL, `number` INTEGER NOT NULL, PRIMARY KEY(`itemId`))",
+        "fields": [
+          {
+            "fieldPath": "itemId",
+            "columnName": "itemId",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "name",
+            "columnName": "name",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "number",
+            "columnName": "number",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "itemId"
+          ],
+          "autoGenerate": false
+        },
+        "indices": [],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "perks",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`perkId` INTEGER NOT NULL, `character` TEXT NOT NULL, `description` TEXT NOT NULL, PRIMARY KEY(`perkId`))",
+        "fields": [
+          {
+            "fieldPath": "perkId",
+            "columnName": "perkId",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "character",
+            "columnName": "character",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "description",
+            "columnName": "description",
+            "affinity": "TEXT",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "perkId"
+          ],
+          "autoGenerate": false
+        },
+        "indices": [],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "HeroItemCrossRef",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`heroId` INTEGER NOT NULL, `itemId` INTEGER NOT NULL, PRIMARY KEY(`heroId`, `itemId`))",
+        "fields": [
+          {
+            "fieldPath": "heroId",
+            "columnName": "heroId",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "itemId",
+            "columnName": "itemId",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "heroId",
+            "itemId"
+          ],
+          "autoGenerate": false
+        },
+        "indices": [],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "HeroPerkCrossRef",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`heroId` INTEGER NOT NULL, `perkId` INTEGER NOT NULL, PRIMARY KEY(`heroId`, `perkId`))",
+        "fields": [
+          {
+            "fieldPath": "heroId",
+            "columnName": "heroId",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "perkId",
+            "columnName": "perkId",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "heroId",
+            "perkId"
+          ],
+          "autoGenerate": false
         },
         "indices": [],
         "foreignKeys": []
@@ -64,7 +182,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '870bd1628aa85fb99ba1af27b517a5e5')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '62eb0141e2059a9903ec52f2f63a441c')"
     ]
   }
 }

@@ -15,6 +15,8 @@ import android.widget.EditText;
 import com.example.jotlapp.R;
 import com.example.jotlapp.adapters.InventoryRecyclerAdapter;
 import com.example.jotlapp.adapters.PerkRecyclerAdapter;
+import com.example.jotlapp.models.Item;
+import com.example.jotlapp.persistence.HeroRepository;
 
 import java.util.ArrayList;
 
@@ -32,6 +34,7 @@ public class InventoryFragment extends Fragment {
 
     // vars
     ArrayList<String> mItemList;
+    private HeroRepository mHeroRepository;
 
     public InventoryFragment() {
         // Required empty public constructor
@@ -58,9 +61,19 @@ public class InventoryFragment extends Fragment {
         mItemEditText = view.findViewById(R.id.FragmentInventory_EditText_Item);
         mAddButton = view.findViewById(R.id.FragmentInventory_Button_Add);
         mItemList = new ArrayList<>();
+        mHeroRepository = new HeroRepository(view.getContext());
 
         buildDummyList();
         initRecyclerView(view);
+
+        mAddButton.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        addItem();
+                    }
+                }
+        );
 
         return view;
     }
@@ -75,6 +88,11 @@ public class InventoryFragment extends Fragment {
 
     private void buildInventoryList() {
 
+    }
+
+    private void addItem() {
+        Item newItem = new Item(mItemEditText.getText().toString(), 32);
+        mHeroRepository.insertItemTask(newItem);
     }
 
     private void buildDummyList() {

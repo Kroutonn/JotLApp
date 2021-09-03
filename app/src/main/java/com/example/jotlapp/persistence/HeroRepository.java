@@ -4,8 +4,10 @@ import android.content.Context;
 
 import androidx.lifecycle.LiveData;
 
+import com.example.jotlapp.async.AddItemAsyncTask;
 import com.example.jotlapp.async.InsertAsyncTask;
 import com.example.jotlapp.models.Hero;
+import com.example.jotlapp.models.Item;
 
 import java.util.List;
 
@@ -19,6 +21,10 @@ public class HeroRepository {
 
     public void insertHeroTask(Hero hero) {
         new InsertAsyncTask(mHeroDatabase.getHeroDao()).execute(hero);
+    }
+
+    public void insertItemTask(Item item) {
+        new AddItemAsyncTask(mHeroDatabase.getHeroDao()).execute(item);
     }
 
     public void updateHero(Hero hero) {
