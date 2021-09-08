@@ -15,13 +15,8 @@ public class Item {
     @ColumnInfo(name="name")
     private String name;
 
-    @NonNull
-    @ColumnInfo(name="number")
-    private int number;
-
-    public Item(String name, int number) {
+    public Item(String name) {
         this.name = name;
-        this.number = number;
     }
 
     public int getItemId() {
@@ -41,20 +36,11 @@ public class Item {
         this.name = name;
     }
 
-    public int getNumber() {
-        return number;
-    }
-
-    public void setNumber(int number) {
-        this.number = number;
-    }
-
     @Override
     public String toString() {
         return "Item{" +
                 "itemId=" + itemId +
                 ", name='" + name + '\'' +
-                ", number=" + number +
                 '}';
     }
 }

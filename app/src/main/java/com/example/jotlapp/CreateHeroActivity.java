@@ -44,10 +44,10 @@ public class CreateHeroActivity extends AppCompatActivity {
     private static final Map<Integer, String> CLASS_MAP;
     static {
         CLASS_MAP = new HashMap<>();
-        CLASS_MAP.put(0, "Voidwarden");
-        CLASS_MAP.put(1, "Red Guard");
-        CLASS_MAP.put(2, "Demolitionist");
-        CLASS_MAP.put(3, "Hatchet");
+        CLASS_MAP.put(0, "voidwarden");
+        CLASS_MAP.put(1, "red guard");
+        CLASS_MAP.put(2, "demolitionist");
+        CLASS_MAP.put(3, "hatchet");
     }
     @Override
     protected void onCreate(Bundle savedInstanceState) {

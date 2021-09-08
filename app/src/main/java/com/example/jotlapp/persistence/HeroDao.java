@@ -10,11 +10,10 @@ import androidx.room.Transaction;
 import androidx.room.Update;
 
 import com.example.jotlapp.models.Hero;
-import com.example.jotlapp.models.Item;
 import com.example.jotlapp.models.Perk;
+import com.example.jotlapp.models.relations.HeroPerkCrossRef;
 import com.example.jotlapp.models.relations.HeroWithItem;
 import com.example.jotlapp.models.relations.HeroWithPerk;
-import com.example.jotlapp.models.relations.ItemWithHero;
 
 import java.util.List;
 
@@ -26,10 +25,7 @@ public interface HeroDao {
     Long[] insertHero(Hero... heroes); // Returns array of rows inserted. -1 if false
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    Long[] insertItem(Item... items);
-
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    Long[] insertPerk(Perk... perks);
+    void insertHeroPerkCrossRef(HeroPerkCrossRef crossRef);
 
     // Query methods
     @Query("SELECT * FROM heroes")
@@ -37,6 +33,9 @@ public interface HeroDao {
 
     @Query("SELECT * FROM heroes WHERE heroId = :id")
     List<Hero> getHeroesWithCustomQuery(String id);
+
+    @Query("SELECT * FROM perks WHERE character = :character")
+    LiveData<List<Perk>> getPerksForCharacter(String character);
 
     @Transaction
     @Query("SELECT * FROM heroes WHERE heroId = :id")
@@ -49,18 +48,6 @@ public interface HeroDao {
     @Delete
     void delete(Hero... heroes);
 
-    @Delete
-    void delete(Item... items);
-
-    @Delete
-    void delete(Perk... perks);
-
     @Update
     void update(Hero... heroes);
-
-    @Update
-    void update(Item... items);
-
-    @Update
-    void update(Perk... perks);
 }

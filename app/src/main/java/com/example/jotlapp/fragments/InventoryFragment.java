@@ -91,8 +91,7 @@ public class InventoryFragment extends Fragment {
     }
 
     private void addItem() {
-        Item newItem = new Item(mItemEditText.getText().toString(), 32);
-        mHeroRepository.insertItemTask(newItem);
+        Item newItem = new Item(mItemEditText.getText().toString());
     }
 
     private void buildDummyList() {

@@ -20,15 +20,18 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.example.jotlapp.adapters.PerkRecyclerAdapter;
 import com.example.jotlapp.adapters.PlayerSheetFragmentAdapter;
 import com.example.jotlapp.models.Hero;
+import com.example.jotlapp.persistence.HeroRepository;
 import com.example.jotlapp.util.MinMaxFilter;
 import com.google.android.material.tabs.TabLayout;
 
 import org.w3c.dom.Text;
 
-public class PlayerSheetActivity extends AppCompatActivity implements TextWatcher {
+public class PlayerSheetActivity extends AppCompatActivity {
 
     private static final String TAG = "PlayerSheetActivity";
 
@@ -51,6 +54,7 @@ public class PlayerSheetActivity extends AppCompatActivity implements TextWatche
     private Hero mHero;
     private int mCurrentTab;
     private PlayerSheetFragmentAdapter mAdapter;
+    private HeroRepository mHeroRepository;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,6 +79,8 @@ public class PlayerSheetActivity extends AppCompatActivity implements TextWatche
         FragmentManager fm = getSupportFragmentManager();
         mAdapter = new PlayerSheetFragmentAdapter(fm, getLifecycle());
         mViewPager.setAdapter(mAdapter);
+
+        mHeroRepository = new HeroRepository(this);
 
         initTabs();
         setupButtons();
@@ -139,6 +145,8 @@ public class PlayerSheetActivity extends AppCompatActivity implements TextWatche
                 }
             }
         }
+
+        checkForChanges();
         return super.dispatchTouchEvent(event);
     }
 
@@ -154,7 +162,14 @@ public class PlayerSheetActivity extends AppCompatActivity implements TextWatche
 
             @Override
             public void onClick(View view) {
-                mExpEditText.setText(subtractOne(mExpEditText.getText().toString()));
+                String oldValue = mHero.getExperiance();
+                String newValue = subtractOne(oldValue);
+
+                if (newValue != oldValue) {
+                    mHero.setExperiance(newValue);
+                    updateHero();
+                    mExpEditText.setText(newValue);
+                }
             }
         });
 
@@ -162,25 +177,44 @@ public class PlayerSheetActivity extends AppCompatActivity implements TextWatche
 
             @Override
             public void onClick(View view) {
-                mExpEditText.setText(addOne(mExpEditText.getText().toString()));
+                String oldValue = mHero.getExperiance();
+                String newValue = addOne(oldValue);
+
+                if (newValue != oldValue) {
+                    mHero.setExperiance(newValue);
+                    updateHero();
+                    mExpEditText.setText(newValue);
+                }
             }
         });
 
         mGoldSubractImgButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mGoldEditText.setText(subtractOne(mGoldEditText.getText().toString()));
+                String oldValue = mHero.getGold();
+                String newValue = subtractOne(oldValue);
+
+                if (newValue != oldValue) {
+                    mHero.setGold(newValue);
+                    updateHero();
+                    mGoldEditText.setText(newValue);
+                }
             }
         });
 
         mGoldAddImgButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mGoldEditText.setText(addOne(mGoldEditText.getText().toString()));
+                String oldValue = mHero.getGold();
+                String newValue = addOne(oldValue);
+
+                if (newValue != oldValue) {
+                    mHero.setGold(newValue);
+                    updateHero();
+                    mGoldEditText.setText(newValue);
+                }
             }
         });
-
-        mExpEditText.addTextChangedListener(this);
     }
 
     private String subtractOne(String val) {
@@ -203,22 +237,28 @@ public class PlayerSheetActivity extends AppCompatActivity implements TextWatche
         return Integer.toString(mVal + 1);
     }
 
+    private void updateHero() {
+        mHeroRepository.updateHero(mHero);
+    }
+
+    private void checkForChanges() {
+        String oldExpValue = mHero.getExperiance();
+        String newExpValue = mExpEditText.getText().toString();
+        String oldGoldValue = mHero.getGold();
+        String newGoldValue = mGoldEditText.getText().toString();
+
+        if (newExpValue != oldExpValue) {
+            mHero.setExperiance(newExpValue);
+            updateHero();
+        }
+
+        if (newGoldValue != oldGoldValue) {
+            mHero.setGold(newGoldValue);
+            updateHero();
+        }
+    }
+
     public Hero getHero() {
         return mHero;
-    }
-
-    @Override
-    public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-    }
-
-    @Override
-    public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-    }
-
-    @Override
-    public void afterTextChanged(Editable editable) {
-
     }
 }

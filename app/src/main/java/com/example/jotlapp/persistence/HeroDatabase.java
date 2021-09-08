@@ -19,11 +19,12 @@ import com.example.jotlapp.models.relations.HeroPerkCrossRef;
             HeroItemCrossRef.class,
             HeroPerkCrossRef.class
         },
-        version = 1
+        version = 2
 )
 public abstract class HeroDatabase extends RoomDatabase {
 
     public static final String DATABASE_NAME = "hero_db";
+    public static final String DATABASE_PATH = "database/hero_db.db";
 
     private static HeroDatabase instance;
 
@@ -33,7 +34,7 @@ public abstract class HeroDatabase extends RoomDatabase {
                     context.getApplicationContext(),
                     HeroDatabase.class,
                     DATABASE_NAME
-            ).build();
+            ).createFromAsset(DATABASE_PATH).build();
         }
         return instance;
     }

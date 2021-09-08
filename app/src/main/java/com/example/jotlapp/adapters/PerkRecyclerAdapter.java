@@ -18,11 +18,12 @@ import java.util.Arrays;
 
 public class PerkRecyclerAdapter extends RecyclerView.Adapter<PerkRecyclerAdapter.ViewHolder> {
 
-
     private ItemClickListener mItemClickListener;
     private ArrayList<String> mPerksList;
+    private Hero mHero;
+    private Context mContext;
 
-    public PerkRecyclerAdapter(ArrayList<String> perkList, ItemClickListener clickListener) {
+    public PerkRecyclerAdapter(Context context, ArrayList<String> perkList, ItemClickListener clickListener) {
         this.mPerksList = perkList;
         this.mItemClickListener = clickListener;
     }
@@ -43,6 +44,7 @@ public class PerkRecyclerAdapter extends RecyclerView.Adapter<PerkRecyclerAdapte
         holder.selectedStatus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                System.out.println(mPerksList.get(currentPosition));
                 mItemClickListener.onItemClick(mPerksList.get(currentPosition));
             }
         });
@@ -68,6 +70,6 @@ public class PerkRecyclerAdapter extends RecyclerView.Adapter<PerkRecyclerAdapte
     }
 
     public interface ItemClickListener {
-        public void onItemClick(String perk);
+        void onItemClick(String perk);
     }
 }
