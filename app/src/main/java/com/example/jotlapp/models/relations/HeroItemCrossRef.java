@@ -6,4 +6,33 @@ import androidx.room.Entity;
 public class HeroItemCrossRef {
     public int heroId;
     public int itemId;
+
+    public HeroItemCrossRef(int heroId, int itemId) {
+        this.heroId = heroId;
+        this.itemId = itemId;
+    }
+
+    public int getHeroId() {
+        return heroId;
+    }
+
+    public void setHeroId(int heroId) {
+        this.heroId = heroId;
+    }
+
+    public int getItemId() {
+        return itemId;
+    }
+
+    public void setItemId(int itemId) {
+        this.itemId = itemId;
+    }
+
+    @Override
+    public String toString() {
+        return "HeroItemCrossRef{" +
+                "heroId=" + heroId +
+                ", itemId=" + itemId +
+                '}';
+    }
 }

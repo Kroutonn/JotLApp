@@ -25,7 +25,7 @@ public interface HeroDao {
     Long[] insertHero(Hero... heroes); // Returns array of rows inserted. -1 if false
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    void insertHeroPerkCrossRef(HeroPerkCrossRef crossRef);
+    void insertHeroPerkCrossRef(HeroPerkCrossRef... crossRef);
 
     // Query methods
     @Query("SELECT * FROM heroes")
@@ -33,6 +33,9 @@ public interface HeroDao {
 
     @Query("SELECT * FROM heroes WHERE heroId = :id")
     List<Hero> getHeroesWithCustomQuery(String id);
+
+    @Query("SELECT EXISTS(SELECT * FROM HeroPerkCrossRef WHERE heroId = :heroId AND perkId = :perkId)")
+    boolean heroHasPerk(int heroId, int perkId);
 
     @Query("SELECT * FROM perks WHERE character = :character")
     LiveData<List<Perk>> getPerksForCharacter(String character);

@@ -17,6 +17,7 @@ import com.example.jotlapp.R;
 import com.example.jotlapp.adapters.PerkRecyclerAdapter;
 import com.example.jotlapp.models.Hero;
 import com.example.jotlapp.models.Perk;
+import com.example.jotlapp.models.relations.HeroPerkCrossRef;
 import com.example.jotlapp.persistence.HeroRepository;
 
 import java.util.ArrayList;
@@ -36,7 +37,8 @@ public class PerksFragment extends Fragment implements PerkRecyclerAdapter.ItemC
     //vars
     private PerkRecyclerAdapter mPerkRecyclerAdapter;
     private Hero mHero;
-    private ArrayList<String> mPerkList;
+    private ArrayList<String> mPerkDescriptionList;
+    private ArrayList<Perk> mPerkList;
     private PlayerSheetActivity mPlayerSheetActivity;
     private HeroRepository mHeroRepository;
 
@@ -54,6 +56,7 @@ public class PerksFragment extends Fragment implements PerkRecyclerAdapter.ItemC
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        mPerkDescriptionList = new ArrayList<>();
         mPerkList = new ArrayList<>();
         mPlayerSheetActivity = (PlayerSheetActivity) getActivity();
         mHero = mPlayerSheetActivity.getHero();
@@ -76,41 +79,26 @@ public class PerksFragment extends Fragment implements PerkRecyclerAdapter.ItemC
         RecyclerView recyclerView = view.findViewById(R.id.FragmentPerks_RecyclerView_PerkList);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(linearLayoutManager);
-        mPerkRecyclerAdapter = new PerkRecyclerAdapter(mPlayerSheetActivity, mPerkList, this );
+        mPerkRecyclerAdapter = new PerkRecyclerAdapter(mPlayerSheetActivity, mPerkList, mHero,this );
         recyclerView.setAdapter(mPerkRecyclerAdapter);
     }
 
     private void buildPerkList() {
-        List<Perk> perkList;
-
         mHeroRepository.getPerksTask(mHero.getCharacter()).observe(mPlayerSheetActivity, new Observer<List<Perk>>() {
                     @Override
                     public void onChanged(List<Perk> perks) {
-                        for (Perk perk : perks) {
-                            mPerkList.add(perk.getDescription());
-                        }
+
+                        mPerkList.addAll(perks);
+
                         mPerkRecyclerAdapter.notifyDataSetChanged();
                     }
                 });
-        /*
-        switch (mHero.getCharacter()) {
-            case "Voidwarden" :
-                mPerkList.addAll(Arrays.asList(getResources().getStringArray(R.array.voidwarden)));
-                break;
-            case "Red Guard" :
-                mPerkList.addAll(Arrays.asList(getResources().getStringArray(R.array.red_guard)));
-                break;
-            case "Demolitionist" :
-                mPerkList.addAll(Arrays.asList(getResources().getStringArray(R.array.demolitionist)));
-                break;
-            case "Hatchet" :
-                mPerkList.addAll(Arrays.asList(getResources().getStringArray(R.array.hatchet)));
-                break;
-        }*/
     }
 
     @Override
-    public void onItemClick(String perk) {
+    public void onItemClick(int selectedPosition) {
+        int selectedPerkID = mPerkList.get(selectedPosition).getPerkId();
 
+        mHeroRepository.addHeroPerkCrossRef(new HeroPerkCrossRef(mHero.getHeroId(), selectedPerkID));
     }
 }

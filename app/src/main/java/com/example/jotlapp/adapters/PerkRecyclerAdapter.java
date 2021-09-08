@@ -12,6 +12,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.jotlapp.R;
 import com.example.jotlapp.models.Hero;
+import com.example.jotlapp.models.Perk;
+import com.example.jotlapp.persistence.HeroRepository;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -19,12 +21,14 @@ import java.util.Arrays;
 public class PerkRecyclerAdapter extends RecyclerView.Adapter<PerkRecyclerAdapter.ViewHolder> {
 
     private ItemClickListener mItemClickListener;
-    private ArrayList<String> mPerksList;
+    private ArrayList<Perk> mPerksList;
     private Hero mHero;
     private Context mContext;
+    private HeroRepository mHeroRepository;
 
-    public PerkRecyclerAdapter(Context context, ArrayList<String> perkList, ItemClickListener clickListener) {
+    public PerkRecyclerAdapter(Context context, ArrayList<Perk> perkList, Hero hero, ItemClickListener clickListener) {
         this.mPerksList = perkList;
+        this.mHero = hero;
         this.mItemClickListener = clickListener;
     }
 
@@ -32,20 +36,26 @@ public class PerkRecyclerAdapter extends RecyclerView.Adapter<PerkRecyclerAdapte
     @Override
     public PerkRecyclerAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_perk_recycler_item, parent, false);
+        mHeroRepository = new HeroRepository(parent.getContext());
         return new ViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull PerkRecyclerAdapter.ViewHolder holder, int position) {
         int currentPosition = holder.getAdapterPosition();
-        holder.description.setText(mPerksList.get(currentPosition));
-        holder.selectedStatus.setActivated(false);
+        Perk currentPerk = mPerksList.get(currentPosition);
+
+        holder.description.setText(mPerksList.get(currentPosition).getDescription());
+
+        boolean hasPerk = mHeroRepository.heroHasPerk(mHero.getHeroId(), currentPerk.getPerkId());
+
+        holder.selectedStatus.setChecked(hasPerk);
 
         holder.selectedStatus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 System.out.println(mPerksList.get(currentPosition));
-                mItemClickListener.onItemClick(mPerksList.get(currentPosition));
+                mItemClickListener.onItemClick(currentPosition);
             }
         });
     }
@@ -70,6 +80,6 @@ public class PerkRecyclerAdapter extends RecyclerView.Adapter<PerkRecyclerAdapte
     }
 
     public interface ItemClickListener {
-        void onItemClick(String perk);
+        void onItemClick(int currentPosition);
     }
 }

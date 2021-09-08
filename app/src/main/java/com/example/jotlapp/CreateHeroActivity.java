@@ -44,10 +44,10 @@ public class CreateHeroActivity extends AppCompatActivity {
     private static final Map<Integer, String> CLASS_MAP;
     static {
         CLASS_MAP = new HashMap<>();
-        CLASS_MAP.put(0, "voidwarden");
-        CLASS_MAP.put(1, "red guard");
-        CLASS_MAP.put(2, "demolitionist");
-        CLASS_MAP.put(3, "hatchet");
+        CLASS_MAP.put(0, "Voidwarden");
+        CLASS_MAP.put(1, "Red Guard");
+        CLASS_MAP.put(2, "Demolitionist");
+        CLASS_MAP.put(3, "Hatchet");
     }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -111,8 +111,9 @@ public class CreateHeroActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(CreateHeroActivity.this, PlayerSheetActivity.class);
                 addNewHero();
-                intent.putExtra("selected_hero", mNewHero);
-                startActivity(intent);
+                //intent.putExtra("selected_hero", mNewHero);
+                //startActivity(intent);
+                finish();
             }
         });
 

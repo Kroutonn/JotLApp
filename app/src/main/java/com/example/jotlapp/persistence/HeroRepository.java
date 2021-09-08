@@ -4,6 +4,7 @@ import android.content.Context;
 
 import androidx.lifecycle.LiveData;
 
+import com.example.jotlapp.async.AddPerkToHeroAsyncTask;
 import com.example.jotlapp.async.InsertAsyncTask;
 import com.example.jotlapp.async.UpdateHeroAsyncTask;
 import com.example.jotlapp.models.Hero;
@@ -29,7 +30,7 @@ public class HeroRepository {
     }
 
     public void addHeroPerkCrossRef(HeroPerkCrossRef crossRef) {
-        mHeroDatabase.getHeroDao().insertHeroPerkCrossRef(crossRef);
+        new AddPerkToHeroAsyncTask(mHeroDatabase.getHeroDao()).execute(crossRef);
     }
 
     public LiveData<List<Hero>> retrieveHeroesTask() {
@@ -40,7 +41,7 @@ public class HeroRepository {
         return mHeroDatabase.getHeroDao().getPerksForCharacter(character);
     }
 
-    public void deleteHero(Hero hero) {
-
+    public boolean heroHasPerk(int heroId, int perkId) {
+        return mHeroDatabase.getHeroDao().heroHasPerk(heroId, perkId);
     }
 }

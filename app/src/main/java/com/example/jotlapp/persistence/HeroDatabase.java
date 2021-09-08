@@ -5,6 +5,8 @@ import android.content.Context;
 import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
+import androidx.room.migration.Migration;
+import androidx.sqlite.db.SupportSQLiteDatabase;
 
 import com.example.jotlapp.models.Hero;
 import com.example.jotlapp.models.Item;
@@ -28,13 +30,17 @@ public abstract class HeroDatabase extends RoomDatabase {
 
     private static HeroDatabase instance;
 
+
     static HeroDatabase getInstance(final Context context) {
         if(instance == null) {
             instance = Room.databaseBuilder(
                     context.getApplicationContext(),
                     HeroDatabase.class,
                     DATABASE_NAME
-            ).createFromAsset(DATABASE_PATH).build();
+            ).createFromAsset(DATABASE_PATH)
+             .fallbackToDestructiveMigration()
+             .allowMainThreadQueries()
+             .build();
         }
         return instance;
     }
