@@ -14,7 +14,7 @@
         android:weightSum="100"
         android:orientation="horizontal">
 
-        <EditText
+        <AutoCompleteTextView
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="75"
@@ -22,8 +22,10 @@
             android:layout_marginEnd="5dp"
             android:layout_marginTop="15dp"
             android:layout_marginBottom="10dp"
-            android:hint="Add Item"
-            android:id="@+id/FragmentInventory_EditText_Item"/>
+            android:hint="Select an item"
+            android:completionThreshold="1"
+            android:id="@+id/FragmentInventory_AutoCompleteTextView_Item"/>
+
 
         <Button
             android:layout_width="0dp"

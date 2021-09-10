@@ -55,6 +55,7 @@ public class PlayerSheetActivity extends AppCompatActivity {
     private int mCurrentTab;
     private PlayerSheetFragmentAdapter mAdapter;
     private HeroRepository mHeroRepository;
+    private String mLevel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -167,6 +168,7 @@ public class PlayerSheetActivity extends AppCompatActivity {
 
                 if (newValue != oldValue) {
                     mHero.setExperiance(newValue);
+                    updateLevel(newValue);
                     updateHero();
                     mExpEditText.setText(newValue);
                 }
@@ -182,6 +184,7 @@ public class PlayerSheetActivity extends AppCompatActivity {
 
                 if (newValue != oldValue) {
                     mHero.setExperiance(newValue);
+                    updateLevel(newValue);
                     updateHero();
                     mExpEditText.setText(newValue);
                 }
@@ -250,12 +253,50 @@ public class PlayerSheetActivity extends AppCompatActivity {
         if (newExpValue != oldExpValue) {
             mHero.setExperiance(newExpValue);
             updateHero();
+            if (updateLevel(newExpValue)) {
+                mLevelTextView.setText("Level " + mHero.getLevel() + " " + mHero.getCharacter());
+            }
         }
 
         if (newGoldValue != oldGoldValue) {
             mHero.setGold(newGoldValue);
             updateHero();
         }
+    }
+
+    private boolean updateLevel(String experiance) {
+        int exp = Integer.parseInt(experiance);
+
+        if (exp < 45 && mLevel != "1") {
+            mHero.setLevel("1");
+            return true;
+        } else if (mLevel != "2" && exp < 95 && exp >= 45) {
+            mHero.setLevel("2");
+            return true;
+        } else if (mLevel != "3" && exp < 150 && exp >= 95) {
+            mHero.setLevel("3");
+            return true;
+        } else if (mLevel != "4" && exp < 210 && exp >= 150) {
+            mHero.setLevel("4");
+            return true;
+        } else if (mLevel != "5" && exp < 275 && exp >= 210) {
+            mHero.setLevel("5");
+            return true;
+        } else if (mLevel != "6" && exp < 345 && exp >= 275) {
+            mHero.setLevel("6");
+            return true;
+        } else if (mLevel != "7" && exp < 420 && exp >= 345) {
+            mHero.setLevel("7");
+            return true;
+        } else if (mLevel != "8" && exp < 500 && exp >= 420) {
+            mHero.setLevel("8");
+            return true;
+        } else if (mLevel != "9" && exp >= 500) {
+            mHero.setLevel("9");
+            return true;
+        }
+
+        return false;
     }
 
     public Hero getHero() {

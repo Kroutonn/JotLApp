@@ -1,8 +1,10 @@
 package com.example.jotlapp;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.lifecycle.Observer;
+import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -15,6 +17,7 @@ import android.widget.LinearLayout;
 
 import com.example.jotlapp.adapters.HeroRecyclerAdapter;
 import com.example.jotlapp.models.Hero;
+import com.example.jotlapp.models.Item;
 import com.example.jotlapp.persistence.HeroRepository;
 import com.example.jotlapp.util.VerticalSpacingItemDecorator;
 
@@ -77,6 +80,7 @@ public class LoadHeroActivity extends AppCompatActivity implements HeroRecyclerA
         mRecyclerView.setLayoutManager(linearLayoutManager);
         VerticalSpacingItemDecorator itemDecorator = new VerticalSpacingItemDecorator(10);
         mRecyclerView.addItemDecoration(itemDecorator);
+        new ItemTouchHelper(itemTouchHelperCallback).attachToRecyclerView(mRecyclerView);
         mHeroRecyclerAdapter = new HeroRecyclerAdapter(mHeroes, this, this);
         mRecyclerView.setAdapter(mHeroRecyclerAdapter);
     }
@@ -89,4 +93,23 @@ public class LoadHeroActivity extends AppCompatActivity implements HeroRecyclerA
         intent.putExtra("selected_hero", mHeroes.get(position));
         startActivity(intent);
     }
+
+    private void deleteNote(Hero hero) {
+        mHeroes.remove(hero);
+        mHeroRecyclerAdapter.notifyDataSetChanged();
+
+        mHeroRepository.deleteHero(hero);
+    }
+
+    private ItemTouchHelper.SimpleCallback itemTouchHelperCallback = new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.RIGHT) {
+        @Override
+        public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
+            return false;
+        }
+
+        @Override
+        public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
+            deleteNote(mHeroes.get(viewHolder.getAdapterPosition()));
+        }
+    };
 }

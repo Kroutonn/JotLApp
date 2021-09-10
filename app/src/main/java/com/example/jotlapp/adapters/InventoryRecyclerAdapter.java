@@ -9,6 +9,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.jotlapp.R;
+import com.example.jotlapp.models.Item;
 
 import java.util.ArrayList;
 
@@ -27,9 +28,10 @@ public class InventoryRecyclerAdapter extends RecyclerView.Adapter<InventoryRecy
         }
     }
 
-    private ArrayList<String> mItemList;
+    private ArrayList<Item> mItemList;
 
-    public InventoryRecyclerAdapter(ArrayList<String> itemList) {
+    public InventoryRecyclerAdapter(ArrayList<Item> itemList) {
+        this.mItemList = new ArrayList<>();
         this.mItemList = itemList;
     }
 
@@ -44,8 +46,8 @@ public class InventoryRecyclerAdapter extends RecyclerView.Adapter<InventoryRecy
     public void onBindViewHolder(@NonNull InventoryRecyclerAdapter.ViewHolder holder, int position) {
         int currentPosition = holder.getAdapterPosition();
 
-        holder.itemName.setText(mItemList.get(currentPosition));
-        holder.itemNumber.setText(Integer.toString(currentPosition));
+        holder.itemName.setText(mItemList.get(currentPosition).getName());
+        holder.itemNumber.setText(Integer.toString(mItemList.get(currentPosition).getItemId()));
     }
 
     @Override

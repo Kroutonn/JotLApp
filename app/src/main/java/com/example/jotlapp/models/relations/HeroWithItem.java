@@ -18,4 +18,8 @@ public class HeroWithItem {
     associateBy = @Junction(HeroItemCrossRef.class)
     )
     public List<Item> items;
+
+    public List<Item> getItems() {
+        return items;
+    }
 }
